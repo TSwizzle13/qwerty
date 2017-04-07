@@ -1,0 +1,111 @@
+#include <iostream>
+#include <windows.h>
+
+using namespace std;
+
+int main()
+{
+
+    struct sepatu{
+        string merk;
+        float harga;
+    }spt[20];
+
+
+
+    int pilih,jmlbrg,angka,kupon,total=0;
+    float poin=0,diskon;
+
+    cout <<"\t\t\t\t\t  Toko Sepatu"<<endl;
+    cout <<"\t\t\t\t  Merk Sepatu yang tersedia"<<endl;
+    cout <<"\t\t\t  Adidas - Nike - Vans - Airwalk - Converse - Ardiles"<<endl;
+    cout <<"\t\t     Beli 3 dapat diskon 10% dan lebih dari 100rb dapat 10 point"<<endl;
+    cout <<"\t\t\tJika Telah Mendapat 100 Point Akan Mendapat Hadiah"<<endl<<endl;
+    menu1:
+    cout <<"Menu : "<<endl;
+    cout << "1. Insert\n2. View\n3. Delete\n4. Total harga\n\nPilih (Input Angka) :";
+    cin>>pilih;
+    switch(pilih){
+        case 1:
+            system ("CLS");
+            cout<<"Masukkan Jumlah Barang Yang di Input : ";
+            cin>>jmlbrg;
+
+            for(int i=0;i<jmlbrg;i++){
+                cout<<"Barang ke-"<<i+1<<endl;
+                cout<<"Masukkan Merk :";
+                cin>>spt[i].merk;
+                cin.ignore();
+                cout<<"Masukkan Harga :";
+                cin>>spt[i].harga;
+                cin.ignore();
+            cout<<endl;
+            }
+            break;
+        case 2:
+            system ("CLS");
+            cout << "Barang Yang Sudah Di Input : "<<endl;
+            for(int i=0 ; i<jmlbrg ; i++){
+                if(spt[i].harga!=0){
+                    cout<<"Barang ke-"<<i+1<<endl;
+                    cout<<"Merk\t: "<<spt[i].merk<<endl;
+                    cout<<"Harga\t: "<<spt[i].harga<<endl;
+                }
+                cout<<endl;
+            }
+            break;
+        case 3:
+            cout <<"Barang yang akan dihapus : (input angka)"<<endl;
+            cin >> angka;
+
+            for(int i=0;i<jmlbrg;i++){
+                if (i==angka-1){
+                    cout<<"Barang ke-"<<i+1<<endl;
+                    cout<<"\nData ke-"<<angka<<" Berhasil Dihapus\n";
+                    spt[i].merk='\0';
+                    spt[i].harga='\0';
+                }
+            cout<<endl;
+            }
+            break;
+        case 4:
+            system ("CLS");
+            total=0;
+            diskon=0;
+            poin=0;
+
+            if(jmlbrg<=3){
+                for(int i=0 ; i<jmlbrg ; i++){
+                    total = total+spt[i].harga;
+                }
+                cout<<"Total Harga : "<<total<<endl;
+                if(total>=100000){
+                    kupon=total/100000;
+                    poin=kupon*10;
+                    cout<<"Anda Mendapat "<<poin<<" Poin"<<endl;
+                    if(poin>=100){
+                        cout<<"Selamat Anda Mendapatkan Hadiah Mobil Koenigsegg Agera R"<<endl;
+                    }
+                }
+            }else if (jmlbrg>3){
+                for(int i=0 ; i<jmlbrg ; i++){
+                total = total+spt[i].harga;
+                diskon = total-(total*10/100);
+
+            }
+            cout<<"Total Harga : "<<diskon<<endl<<endl;
+            if(total>=100000){
+                    kupon=total/100000;
+                    poin=kupon*10;
+                    cout<<"Anda Mendapat "<<poin<<" Poin"<<endl;
+                    if(poin>=100){
+                        cout<<"Selamat Anda Mendapatkan Hadiah Mobil Koenigsegg Agera R"<<endl;
+                    }
+                    cout<<endl;
+                }
+                break;
+            }
+
+    }
+    goto menu1;
+}
